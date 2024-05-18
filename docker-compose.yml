@@ -19,6 +19,22 @@ services:
       - ".:/var/www"
       - "composer-vendor:/var/www/vendor"
     command: bash -c "composer install && apache2-foreground"
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.4.0
+    ports:
+      - 3306:3306
+    environment:
+      TZ: Asia/Tokyo
+      MYSQL_DATABASE: "laravel"
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - "mysql:/var/lib/mysql"
 
 volumes:
   composer-vendor:
+  mysql:
