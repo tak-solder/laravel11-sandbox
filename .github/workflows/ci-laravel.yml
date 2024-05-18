@@ -74,5 +74,5 @@ jobs:
       - name: Coverage Summary
         run: |
           echo "## PHPUnit Coverage Results" >> $GITHUB_STEP_SUMMARY
-          head -n6 ./phpunit-coverage.txt >> $GITHUB_STEP_SUMMARY
+          grep "Code Coverage Report:" -A6 ./phpunit-coverage.txt >> $GITHUB_STEP_SUMMARY
 
