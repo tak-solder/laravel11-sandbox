@@ -13,6 +13,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 WORKDIR /var/www/
 
 EXPOSE 80
+ENV TZ Asia/Tokyo
 
 COPY ./.docker/develop/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY ./.docker/develop/php.ini /usr/local/etc/php/php.ini
