@@ -1,0 +1,24 @@
+---
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:1.25-alpine
+    ports:
+      - 80:80
+    volumes:
+      - "./.docker/default.conf:/etc/nginx/conf.d/default.conf"
+    depends_on:
+      - app
+
+  app:
+    build:
+      context: ./
+      dockerfile: .docker/develop/Dockerfile
+    volumes:
+      - ".:/var/www"
+      - "composer-vendor:/var/www/vendor"
+    command: bash -c "composer install && apache2-foreground"
+
+volumes:
+  composer-vendor:
