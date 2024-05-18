@@ -2,6 +2,10 @@ name: ci laravel
 
 on: push
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -29,6 +33,11 @@ jobs:
           php-version: '8.3'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, bcmath, soap, intl, gd, exif, iconv
           coverage: none
+
+      - name: Check DB connection
+        run: |
+          echo "Checking DB connection..."
+          mysql --host=localhost --port=113306 --user=root --password= --execute='SHOW DATABASES;'
 
       - name: vendor Directory Cache
         id: composer-cache
