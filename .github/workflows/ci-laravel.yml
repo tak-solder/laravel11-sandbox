@@ -68,4 +68,6 @@ jobs:
         run: ./vendor/bin/phpstan --memory-limit=4G
 
       - name: Run phpunit
-        run: ./vendor/bin/phpunit --testdox
+        run: |
+          php -dxdebug.mode=coverage ./vendor/bin/phpunit --testdox --colors=neve --coverage-text=phpunit-coverage.txt
+          cat phpunit-coverage.txt
