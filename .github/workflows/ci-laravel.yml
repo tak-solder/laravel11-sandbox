@@ -70,4 +70,9 @@ jobs:
       - name: Run phpunit
         run: |
           php -dxdebug.mode=coverage ./vendor/bin/phpunit --testdox --colors=neve --coverage-text=phpunit-coverage.txt
-          cat phpunit-coverage.txt
+
+      - name: Coverage Summary
+        run: |
+          echo "## PHPUnit Coverage Results" >> $GITHUB_STEP_SUMMARY
+          head -n6 ./phpunit-coverage.txt >> $GITHUB_STEP_SUMMARY
+
