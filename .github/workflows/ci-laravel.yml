@@ -52,6 +52,11 @@ jobs:
       - name: migration
         run: php artisan migrate
 
+      - name: Check for uncommitted models phpdoc
+        run: |
+          php artisan ide-helper:models --write
+          git diff --exit-code
+
       - name: Run pint
         run: ./vendor/bin/pint --test
 
