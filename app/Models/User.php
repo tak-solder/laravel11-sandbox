@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use PHPUnit\Framework\Attributes\CodeCoverageIgnore;
 
 /**
  * @property int $id
@@ -53,9 +54,9 @@ class User extends Authenticatable
 
     /**
      * Get the attributes that should be cast.
-     *
      * @return array<string, string>
      */
+    #[CodeCoverageIgnore]
     protected function casts(): array
     {
         return [
