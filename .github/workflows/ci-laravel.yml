@@ -64,5 +64,8 @@ jobs:
           ./vendor/bin/pint --dirty
           git diff --exit-code
 
+      - name: Run phpstan
+        run: ./vendor/bin/phpstan --memory-limit=4G
+
       - name: Run phpunit
         run: ./vendor/bin/phpunit --testdox
