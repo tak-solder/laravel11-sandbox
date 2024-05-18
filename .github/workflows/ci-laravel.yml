@@ -52,13 +52,17 @@ jobs:
       - name: migration
         run: php artisan migrate
 
+      # 注意: "Check for uncommitted models phpdoc"よりも前に実行する
+      - name: Run pint
+        run: ./vendor/bin/pint --test
+
+      # ide-helper:modelsの実行漏れがないか確認する
+      # ide-helper:models実行でpintのフォーマットが崩れることがあるのでフォーマットしなおしている
       - name: Check for uncommitted models phpdoc
         run: |
           php artisan ide-helper:models --write
+          ./vendor/bin/pint --dirty
           git diff --exit-code
-
-      - name: Run pint
-        run: ./vendor/bin/pint --test
 
       - name: Run phpunit
         run: ./vendor/bin/phpunit --testdox
