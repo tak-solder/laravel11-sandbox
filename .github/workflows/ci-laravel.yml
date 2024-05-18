@@ -24,6 +24,11 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
+      - name: Check DB connection
+        run: |
+          echo "Checking DB connection..."
+          mysql --host=127.0.0.1 --port=13306 --user=root --password= --execute='SHOW DATABASES;'
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -33,11 +38,6 @@ jobs:
           php-version: '8.3'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, bcmath, soap, intl, gd, exif, iconv
           coverage: none
-
-      - name: Check DB connection
-        run: |
-          echo "Checking DB connection..."
-          mysql --host=127.0.0.1 --port=113306 --user=root --password= --execute='SHOW DATABASES;'
 
       - name: vendor Directory Cache
         id: composer-cache
