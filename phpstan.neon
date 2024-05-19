@@ -7,9 +7,9 @@ parameters:
 
     level: 9
 
-#    ignoreErrors:
-#        - '#PHPDoc tag @var#'
-#
+    ignoreErrors:
+        - '#Attribute class PHPUnit\\Framework\\Attributes\\CodeCoverageIgnore does not exist.#'
+
 #    excludePaths:
 #        - ./*/*/FileToBeExcluded.php
 #

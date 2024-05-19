@@ -32,7 +32,7 @@ jobs:
         with:
           php-version: '8.3'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, bcmath, soap, intl, gd, exif, iconv
-          coverage: none
+          coverage: xdebug
 
       - name: vendor Directory Cache
         id: composer-cache
@@ -68,4 +68,11 @@ jobs:
         run: ./vendor/bin/phpstan --memory-limit=4G
 
       - name: Run phpunit
-        run: ./vendor/bin/phpunit --testdox
+        run: |
+          php -dxdebug.mode=coverage ./vendor/bin/phpunit --testdox --colors=neve --coverage-text=phpunit-coverage.txt
+
+      - name: Coverage Summary
+        run: |
+          echo "## PHPUnit Coverage Results" >> $GITHUB_STEP_SUMMARY
+          grep "Code Coverage Report:" -A6 ./phpunit-coverage.txt >> $GITHUB_STEP_SUMMARY
+

@@ -26,8 +26,15 @@ class IdeHelper extends Command
     public function handle(): void
     {
         if (app()->environment('local')) {
-            $this->call('ide-helper:generate');
-            $this->call('ide-helper:meta');
+            $this->generate();
+        } else {
+            $this->info('"ide-helper:run" is only works in local environment');
         }
+    }
+
+    private function generate(): void
+    {
+        $this->call('ide-helper:generate');
+        $this->call('ide-helper:meta');
     }
 }
