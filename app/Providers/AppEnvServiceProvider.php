@@ -25,7 +25,8 @@ class AppEnvServiceProvider extends ServiceProvider
         }
     }
 
-    #[CodeCoverageIgnore] private function registerLocal(): void
+    #[CodeCoverageIgnore]
+    private function registerLocal(): void
     {
         $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
         $this->app->register(TelescopeServiceProvider::class);
